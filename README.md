@@ -2,12 +2,15 @@
 
 #### 介绍
 点餐uniapp源码
-uniapp点餐登录以及搜索
-nui app 点餐源码
-主要为点餐，登录祖册以及结账功能
+ uniapp点餐登录以及搜索
+主要为点餐以及结账功能
+登录注册权限设置
 
 #### 软件架构
-软件架构说明
+软件架构说明：
+uniapp以及uni ui
+html vue css 以及js
+
 
 
 #### 安装教程
@@ -18,6 +21,8 @@ nui app 点餐源码
 
 #### 使用说明
 
+
+git分支为dev分支
 1.  xxxx
 2.  xxxx
 3.  xxxx
