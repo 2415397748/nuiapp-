@@ -38,14 +38,14 @@
 			{
 				"text":"首页",
 				"pagePath":"pages/index/index",
-				"iconPath":"static/首页.png",
-				"selectedIconPath":"static/首页_填充.png"
+				"iconPath":"./static/shouye.png",
+				"selectedIconPath":"./static/shouyetianchong.png"
 			},
 			{
 				"text":"登录",
 				"pagePath":"pages/login/login",
-				"iconPath":"static/登录.png",
-				"selectedIconPath":"static/登录_填充.png"
+				"iconPath":"./static/denglu.png",
+				"selectedIconPath":"./static/denglutianchong.png"
 			}
 		]
 	}

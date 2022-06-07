@@ -1,6 +1,6 @@
 <template>
-	<view>
-		<view>
+	<view style="text-align: center;padding-top: 20px;">
+		<view v-if="!this.$store.state.token">
 			<form @submit="formSubmit" @reset="formReset">
 				<view class="uni-form-item uni-column">
 					<view class="title">账号:</view>
@@ -12,9 +12,16 @@
 				</view>
 				<view class="uni-btn-v">
 					<button form-type="submit">登录</button>
-					<button type="default" form-type="reset">注册</button>
+					<button type="default" form-type="reset" >注册</button>
 				</view>
 			</form>
+		</view>
+		<view v-else>
+			<view>
+				<image src="../../static/yonghu.png"></image>
+			</view>
+			<text>用户：{{val}}</text>
+			<button type="default" @click="handleLogout" >退出登录</button>
 		</view>
 	</view>
 </template>
@@ -32,37 +39,48 @@
 					    account: 'admin',
 						password: 'admin123',
 					},
-				]
+				],
+				val:'yq1586'
 			}
 		},
+		// onLoad: function () {
+		// 	console.log(this.$store.state.token)
+		// },
 		methods: {
 			//表单提交并重置
 			formSubmit(e) {
-				// console.log(e);
 				const account = this.$data.MySQL.filter((items) => items.account === this.from.account && items.password === this.from.password);
-				if(account.length > 0){
-					console.log('登录成功',JSON.stringify(this.from))
-				}else {
+				if(account.length < 1){
 					uni.showModal({
 						content: '账号密码错误',
 						showCancel:false
 					});
+				}else {
+					this.$store.dispatch('login', this.from.account)
 				};
 				this.from.account= '';
 				this.from.password= '';
+				console.log(this.$store.state.token)
 			},
 			//表单祖册并重置
 			formReset(e) {
 				const account = this.$data.MySQL.filter((items) => items.account === this.from.account);
 				if(account.length > 0){
-					console.log('账号已存在',JSON.stringify(this.from))
+					uni.showModal({
+						content: '账号已存在',
+						showCancel:false
+					});
 				}else {
 					uni.showModal({
 						content: '注册成功',
 						showCancel:false
 					});
 				}
-			}
+			},
+			//退出登录
+			handleLogout() {
+				this.$store.dispatch('logout')
+			},
 		}
 	}
 </script>

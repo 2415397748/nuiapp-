@@ -30,10 +30,11 @@
             "outputPath": ""
         },
         "disableUseStrict": false,
-        "useCompilerPlugins": false
+        "useCompilerPlugins": false,
+        "minifyWXML": true
     },
     "compileType": "miniprogram",
-    "libVersion": "2.24.4",
+    "libVersion": "2.24.5",
     "appid": "touristappid",
     "projectname": "uniapp",
     "condition": {},

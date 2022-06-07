@@ -21,43 +21,43 @@
 				menus:[
 					{
 						id: 1,
-						src: '../../static/青菜炒龙虾.jpeg',
+						src: '../../static/qingcaichaolongxia.jpeg',
 						menu:'青菜炒龙虾',
 					},
 					{
 						id: 2,
-						src: '../../static/辣椒炒肉.jpeg',
+						src: '../../static/lajiaochaorou.jpeg',
 						menu:'辣椒炒肉',
 					},
 					{
 						id: 3,
-						src: '../../static/麻婆豆腐.jpeg',
+						src: '../../static/mapodoufu.jpeg',
 						menu:'麻婆豆腐',
 					},
 					{
 						id: 4,
-						src: '../../static/香菇炖豆腐.jpeg',
+						src: '../../static/xianggudundoufu.jpeg',
 						menu:'香菇炖豆腐',
 					},
 					{
 						id: 6,
-						src: '../../static/辣子鸭.jpeg',
+						src: '../../static/laziya.jpeg',
 						menu:'辣子鸭',
 					},
 					{
 						id: 7,
-						src: '../../static/香菇鸡肉.jpeg',
-						menu:'香菇鸡肉',
+						src: '../../static/xiangguhuaji.jpeg',
+						menu:'香菇滑鸡',
 					},
 					{
 						id: 11,
-						src: '../../static/香菇炖豆腐.jpeg',
-						menu:'香菇炖豆腐',
+						src: '../../static/hongshaoqiezi.jpeg',
+						menu:'红烧茄子',
 					},
 					{
 						id: 12,
-						src: '../../static/香菇鸡肉.jpeg',
-						menu:'香菇鸡肉',
+						src: '../../static/fanqiechaojidan.jpeg',
+						menu:'番茄炒鸡蛋',
 					},
 				],
 			}
