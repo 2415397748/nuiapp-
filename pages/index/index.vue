@@ -1,15 +1,18 @@
 <template>
 	<view>
 		<view>
-			<input class="uni-input" focus placeholder="搜索" v-model="val"
-			 style="line-height: 50px;height: 50px;border:1px solid #555555;padding-left: 20px;border-radius: 30px;margin-top: 5px;"/>
-			<icon type="search" size="26" style="position: absolute;right: 15px;top: 13px;" v-if="!val"/>
+			<uni-search-bar class="uni-mt-10" radius="5" placeholder="搜索" clearButton="auto" cancelButton="none" v-model="val"/>
 		</view>
-		<view v-for="(item,index) in list" class="item" @click="navigateTo(item)">
-			<image style="width: 100px; height: 100px;" :src="item.src" :alt="item.menu"></image>
+		<view v-for="(item,index) in list" class="item">
+			<image style="width: 100px; height: 100px;" :src="item.src" :alt="item.menu"  @click="navigateTo(item)"></image>
 			<view>
 				<text>{{item.menu}}</text>
 			</view>
+		</view>
+		<view>
+			<uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical"
+						:direction="direction" @trigger="trigger" @fabClick="fabClick" />
+			点单数量：{{data.money}}
 		</view>
 	</view>
 </template>
@@ -63,20 +66,67 @@
 				],
 				filterName:'',
 				val:'',
+				data:{
+					money: 0,
+				},
+				title: 'uni-fab',
+				directionStr: '垂直',
+				horizontal: 'left',
+				vertical: 'bottom',
+				direction: 'horizontal',
+				pattern: {
+					color: '#7A7E83',
+					backgroundColor: '#fff',
+					selectedColor: '#007AFF',
+					buttonColor: '#007AFF',
+					iconColor: '#fff'
+				},
+				is_color_type: false,
+				content: [{
+						iconPath: '/static/image.png',
+						selectedIconPath: '/static/image-active.png',
+						text: '相册',
+						active: false
+					},
+					{
+						iconPath: '/static/home.png',
+						selectedIconPath: '/static/home-active.png',
+						text: '首页',
+						active: false
+					},
+					{
+						iconPath: '/static/star.png',
+						selectedIconPath: '/static/star-active.png',
+						text: '收藏',
+						active: false
+					}
+				]
 			}
 		},
 		onLoad() {
-
+			console.log(this.data)
 		},
 		methods: {
 			search(val){
 				this.val = this.filterName
 			},
 			navigateTo(item){
-				let value = '../menu/menu?id=' + item.id 
+				let value = '../menu/menu?id=' + item.id;
 				uni.navigateTo({
-					url:value
-				});
+					url: value,
+					events: {
+						recive: (data) => {
+							//data.data为返回的数据
+							console.log('返回的数据',data.data)
+							this.data = data.data
+						}
+					},
+					success: (res) => {
+						res.eventChannel.emit('send', {
+							data: this.data
+						})
+					}
+				})
 			},
 		},
 		computed:{
@@ -102,4 +152,11 @@
 	width: calc(50% - 20px);
 	text-align:center
  }
+ .warp {
+ 		padding: 10px;
+ 	}
+ 
+ 	.button {
+ 		margin-bottom: 10px;
+ 	}
 </style>

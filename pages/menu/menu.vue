@@ -6,6 +6,9 @@
 				<text>{{menu}}</text>
 			</view>
 		</view>
+		<view>
+			总价：{{data.money}}
+		</view>
 	</view>
 </template>
 
@@ -60,13 +63,27 @@
 						menu:'番茄炒鸡蛋',
 					},
 				],
+				data:{}
 			}
 		},
 		onLoad(option) {
-			this.id = JSON.parse(option["id"]) || ""
-			const account = this.menus.filter((items) => items.id === this.id)
-			this.src = account[0].src
-			this.menu = account[0].menu
+			this.id = JSON.parse(option["id"]) || "";
+			const account = this.menus.filter((items) => items.id === this.id);
+			this.src = account[0].src;
+			this.menu = account[0].menu;
+			const eventChannel = this.getOpenerEventChannel();
+			eventChannel.on('send', (data) => {
+				//data.data为接收的数据
+				this.data = data.data
+				console.log('接收的数据',data.data)
+			})
+		},
+		onUnload(){
+			this.data.money += 1;
+			const eventChannel = this.getOpenerEventChannel();
+			eventChannel.emit('recive', {
+				data: this.data
+			});
 		},
 		methods: {
 			

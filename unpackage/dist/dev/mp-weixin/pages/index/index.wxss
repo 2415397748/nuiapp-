@@ -5,4 +5,10 @@
 	width: calc(50% - 20px);
 	text-align:center
 }
+.warp {
+ 		padding: 10px;
+}
+.button {
+ 		margin-bottom: 10px;
+}
 

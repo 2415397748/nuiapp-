@@ -13,9 +13,8 @@
 				"navigationBarTitleText":"登录"
 			}
 		    
-		}
-		
-        ,{
+		},
+		{
             "path" : "pages/menu/menu",
             "style" :                                                                                    
             {
@@ -31,6 +30,12 @@
 		"backgroundColor": "#F8F8F8",
 		"enablePullDownRefresh":true
 	},
+	// "easycom": {
+	//   "autoscan": true,
+	//   "custom": {
+	//     "^uni-(.*)": "@/components/uni-$1.vue" // 匹配components目录内的vue文件
+	//   }
+	// },
 	"tabBar":{
 		"color":"#708090",
 		"selectedColor":"#000000",
