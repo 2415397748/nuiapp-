@@ -3,15 +3,14 @@
 		<view>
 			<uni-search-bar class="uni-mt-10" radius="5" placeholder="搜索" clearButton="auto" cancelButton="none" v-model="val"/>
 		</view>
-		<view v-for="(item,index) in list" class="item">
+		<view v-for="(item,index) in list" class="item" :key="item.id">
 			<image style="width: 100px; height: 100px;" :src="item.src" :alt="item.menu"  @click="navigateTo(item)"></image>
 			<view>
 				<text>{{item.menu}}</text>
 			</view>
 		</view>
+		<vue-settlement></vue-settlement>
 		<view>
-			<uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical"
-						:direction="direction" @trigger="trigger" @fabClick="fabClick" />
 			点单数量：{{data.money}}
 		</view>
 	</view>

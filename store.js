@@ -18,13 +18,21 @@ export default new Vuex.Store({
 	mutations: {
 		logins: (state, token) => {
 			//传入登录状态token
-			window.sessionStorage.setItem('token', JSON.stringify(token))
+			uni.setStorage({
+							key: 'token',
+							data: token
+						})
 			state.token = token
+			console.log(state.token)
+			// window.sessionStorage.setItem('token', JSON.stringify(token))
 		},
 		logouts: (state) => {
 			//清空登录状态token
-			window.sessionStorage.removeItem('token')
+			uni.removeStorage({
+							key: 'token'
+						});
 			state.token = ''
+			// window.sessionStorage.removeItem('token')
 		},
 	},
     //和mutation的功能大致相同，不同之处在于 ==》

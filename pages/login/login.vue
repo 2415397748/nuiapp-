@@ -1,11 +1,11 @@
 <template>
-	<view style="text-align: center;padding-top: 20px;">
-		<view v-if="!this.$store.state.token">
-			<uni-forms ref="form" :modelValue="formData" :rules="rules" style="padding: 0 20px;">
-				<uni-forms-item label="账号 :" name="account">
+	<view style="text-align: center;">
+		<view v-if="!token">
+			<uni-forms ref="form" :modelValue="formData" :rules="rules">
+				<uni-forms-item label="账号 :" name="account" style="padding: 10px 20px;">
 					<uni-easyinput type="text" v-model="formData.account" placeholder="请输入账号" @keydown.enter.native="formSubmit"/>
 				</uni-forms-item>
-				<uni-forms-item label="密码 :" name="password">
+				<uni-forms-item label="密码 :" name="password" style="padding: 0 20px;">
 					<uni-easyinput v-model="formData.password" type="password" placeholder="请输入密码" @keydown.enter.native="formSubmit"/>
 				</uni-forms-item>
 			</uni-forms>
@@ -30,6 +30,7 @@
 	export default {
 		data() {
 			return {
+				token:false,
 				MySQL:[
 					{
 					    account: 'admin',
@@ -74,11 +75,15 @@
 				}
 			}
 		},
+		onLoad() {
+			this.token = this.$store.state.token
+		},
 		methods: {
 			// 表单提交并重置
 			formSubmit() {
+				const account = this.MySQL.filter((items) => items.account === this.formData.account && items.password === this.formData.password);
 				this.$refs.form.validate().then(res=>{
-					const account = this.MySQL.filter((items) => items.account === res.account && items.password === res.password);
+					console.log(this.$store.state.token,'登录前')
 					if(account.length < 1){
 						uni.showModal({
 							content: '账号密码错误',
@@ -86,15 +91,16 @@
 						});
 					}else {
 						this.$store.dispatch('login', res.account);
-						this.formData.account= '';
-						this.formData.password= '';
+						this.token = this.$store.state.token
 					};
 				}).catch(err =>{})
+				
 			},
 			//表单注册并重置
-			formReset(e) {
+			//判断是否数据库存在账号
+			formReset() {
+				const account = this.MySQL.filter((items) => items.account === this.formData.account);
 				this.$refs.form.validate().then(res=>{
-					const account = this.MySQL.filter((items) => items.account === this.formData.account);
 					if(account.length > 0){
 						uni.showModal({
 							content: '账号已存在',
@@ -105,15 +111,17 @@
 							content: '注册成功',
 							showCancel:false
 						});
-						this.MySQL.push(this.formData);
-						this.formData.account= '';
-						this.formData.password= '';
+						const formData = Object.assign({},this.formData)
+						this.MySQL.push(formData);
+						this.formData.account = '';
+						this.formData.password = '';
 					}
 				}).catch(err =>{})
 			},
 			//退出登录
 			handleLogout() {
-				this.$store.dispatch('logout')
+				this.$store.dispatch('logout');
+				this.token = this.$store.state.token
 			},
 		}
 	}

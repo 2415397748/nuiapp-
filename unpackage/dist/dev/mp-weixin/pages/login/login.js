@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uniForms: function() {
-      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 44))
+      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 48))
     },
     uniFormsItem: function() {
-      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms-item/uni-forms-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 55))
+      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms-item/uni-forms-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 59))
     },
     uniEasyinput: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 37))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 66))
     }
   }
 } catch (e) {
@@ -214,9 +214,10 @@ var _validatorUtils = __webpack_require__(/*! ../../Utils/validatorUtils.js */ 2
 //
 //
 //
-var _default = { data: function data() {return { MySQL: [{ account: 'admin', password: 'admin123' }], val: 'yq1586', // 表单数据
+var _default = { data: function data() {return { token: false, MySQL: [{ account: 'admin', password: 'admin123' }], val: 'yq1586', // 表单数据
       formData: { account: '', password: '' }, rules: { // 对account字段进行必填验证
-        account: { rules: [{ required: true, errorMessage: '账号不能为空' }, { minLength: 5, maxLength: 10, errorMessage: '账号长度在 {minLength} 到 {maxLength} 个字符' }, { validateFunction: _validatorUtils.validateaCcount }] },
+        account: { rules: [{ required: true, errorMessage: '账号不能为空' }, { minLength: 5, maxLength: 10, errorMessage: '账号长度在 {minLength} 到 {maxLength} 个字符' }, {
+            validateFunction: _validatorUtils.validateaCcount }] },
 
 
 
@@ -235,11 +236,15 @@ var _default = { data: function data() {return { MySQL: [{ account: 'admin', pas
 
 
   },
+  onLoad: function onLoad() {
+    this.token = this.$store.state.token;
+  },
   methods: {
     // 表单提交并重置
     formSubmit: function formSubmit() {var _this = this;
+      var account = this.MySQL.filter(function (items) {return items.account === _this.formData.account && items.password === _this.formData.password;});
       this.$refs.form.validate().then(function (res) {
-        var account = _this.MySQL.filter(function (items) {return items.account === res.account && items.password === res.password;});
+        console.log(_this.$store.state.token, '登录前');
         if (account.length < 1) {
           uni.showModal({
             content: '账号密码错误',
@@ -247,15 +252,16 @@ var _default = { data: function data() {return { MySQL: [{ account: 'admin', pas
 
         } else {
           _this.$store.dispatch('login', res.account);
-          _this.formData.account = '';
-          _this.formData.password = '';
+          _this.token = _this.$store.state.token;
         };
       }).catch(function (err) {});
+
     },
     //表单注册并重置
-    formReset: function formReset(e) {var _this2 = this;
+    //判断是否数据库存在账号
+    formReset: function formReset() {var _this2 = this;
+      var account = this.MySQL.filter(function (items) {return items.account === _this2.formData.account;});
       this.$refs.form.validate().then(function (res) {
-        var account = _this2.MySQL.filter(function (items) {return items.account === _this2.formData.account;});
         if (account.length > 0) {
           uni.showModal({
             content: '账号已存在',
@@ -266,7 +272,8 @@ var _default = { data: function data() {return { MySQL: [{ account: 'admin', pas
             content: '注册成功',
             showCancel: false });
 
-          _this2.MySQL.push(_this2.formData);
+          var formData = Object.assign({}, _this2.formData);
+          _this2.MySQL.push(formData);
           _this2.formData.account = '';
           _this2.formData.password = '';
         }
@@ -275,6 +282,7 @@ var _default = { data: function data() {return { MySQL: [{ account: 'admin', pas
     //退出登录
     handleLogout: function handleLogout() {
       this.$store.dispatch('logout');
+      this.token = this.$store.state.token;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

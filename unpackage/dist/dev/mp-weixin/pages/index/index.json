@@ -2,6 +2,6 @@
   "navigationBarTitleText": "首页",
   "usingComponents": {
     "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
-    "uni-fab": "/uni_modules/uni-fab/components/uni-fab/uni-fab"
+    "vue-settlement": "/components/vue-settlement"
   }
 }
