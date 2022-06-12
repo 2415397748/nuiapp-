@@ -3,7 +3,7 @@
  */
 
 //验证账号
-export function validateaCcount (rule,value,data,callback) {
+export function validateCcount (rule,value,data,callback) {
 	const r = /^[0-9A-Za-z]{5,10}$/
 	// 要求：由数字和字母组成，并且要同时含有数字和字母，且长度要在5-10位之间。
 	if (value === null || value.trim() === '') {
@@ -16,7 +16,7 @@ export function validateaCcount (rule,value,data,callback) {
 }
 
 //验证账号
-export function validateaPassword (rule,value,data,callback) {
+export function validatePassword (rule,value,data,callback) {
 	const r = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{5,10}$/
 	// 要求：由数字和字母组成，并且要同时含有数字和字母，且长度要在5-10位之间。
 	if (value === null || value.trim() === '') {

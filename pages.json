@@ -21,6 +21,15 @@
                 "navigationBarTitleText": "菜单详情"
             }
             
+        },
+		{
+            "path" : "pages/ShoppingCart/ShoppingCart",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"globalStyle": {
@@ -45,14 +54,20 @@
 			{
 				"text":"首页",
 				"pagePath":"pages/index/index",
-				"iconPath":"./static/shouye.png",
-				"selectedIconPath":"./static/shouyetianchong.png"
+				"iconPath":"/static/shouye.png",
+				"selectedIconPath":"/static/shouyetianchong.png"
+			},
+			{
+				"text":"购物车",
+				"pagePath":"pages/ShoppingCart/ShoppingCart",
+				"iconPath":"/static/gouwuche.png",
+				"selectedIconPath":"/static/gouwuchetianchong.png"
 			},
 			{
 				"text":"登录",
 				"pagePath":"pages/login/login",
-				"iconPath":"./static/denglu.png",
-				"selectedIconPath":"./static/denglutianchong.png"
+				"iconPath":"/static/denglu.png",
+				"selectedIconPath":"/static/denglutianchong.png"
 			}
 		]
 	}

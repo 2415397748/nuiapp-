@@ -10,14 +10,14 @@
 				</uni-forms-item>
 			</uni-forms>
 			<button @click="formSubmit">登录</button>
-			<button @click="formReset" >注册</button>
+			<button @click="formReset">注册</button>
 			<view style="padding-top: 10px;">
 				<text>账号：admin&#12288;&#12288;密码：admin123</text>
 			</view>
 		</view>
 		<view v-else>
 			<view>
-				<image src="../../static/yonghu.png"></image>
+				<image src="@/static/yonghu.png"></image>
 			</view>
 			<text>用户：{{val}}</text>
 			<button type="default" @click="handleLogout" >退出登录</button>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-	import {validateaCcount,validateaPassword} from '../../Utils/validatorUtils.js'
+	import {validateCcount,validatePassword} from '@/Utils/validatorUtils.js'
 	export default {
 		data() {
 			return {
@@ -56,7 +56,7 @@
 								errorMessage: '账号长度在 {minLength} 到 {maxLength} 个字符',
 							},
 							{
-								validateFunction:validateaCcount
+								validateFunction:validateCcount
 							}
 						]
 					},
@@ -68,7 +68,7 @@
 							errorMessage: '请输入正确的邮箱地址',
 						},
 						{
-							validateFunction:validateaPassword
+							validateFunction:validatePassword
 						}
 						]
 					}
@@ -83,7 +83,6 @@
 			formSubmit() {
 				const account = this.MySQL.filter((items) => items.account === this.formData.account && items.password === this.formData.password);
 				this.$refs.form.validate().then(res=>{
-					console.log(this.$store.state.token,'登录前')
 					if(account.length < 1){
 						uni.showModal({
 							content: '账号密码错误',

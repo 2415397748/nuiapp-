@@ -6,9 +6,6 @@
 				<text>{{menu}}</text>
 			</view>
 		</view>
-		<view>
-			总价：{{data.money}}
-		</view>
 	</view>
 </template>
 
@@ -79,7 +76,6 @@
 			})
 		},
 		onUnload(){
-			this.data.money += 1;
 			const eventChannel = this.getOpenerEventChannel();
 			eventChannel.emit('recive', {
 				data: this.data

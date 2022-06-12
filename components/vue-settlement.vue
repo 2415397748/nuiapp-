@@ -1,108 +1,101 @@
 <template>
 	<view>
-		<uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical"
-					:direction="direction" @trigger="trigger" @fabClick="fabClick" />
+		<view class="up_img_wrap">
+			<uni-list v-for="(item,index) in menus" :key="item.id">
+				<uni-list-chat :title="item.menu" :avatar="item.src" :note="'￥' + String(item.price)" badge-positon="left" clickable @click="navigateTo(item)">
+					<view class="chat-custom-right">
+						<text class="chat-custom-text"></text>
+						<uni-number-box value="0" @change="(value) => changeValue(value,item)" @click.native.stop="nativeStop()"/>
+					</view>
+				</uni-list-chat>
+			</uni-list>
+		</view>
+		<view style="text-align: center;">
+			<text>总价格：{{value}}</text>
+		</view>
 	</view>
 </template>
 
 <script>
 	export default {
-		components: {},
+		props:{
+			menus:{
+				type:Array,
+				required: true,
+			},
+			index:{
+				type:Number,
+				value:-1
+			}
+		},
 		data() {
 			return {
-				title: 'uni-fab',
-				directionStr: '垂直',
-				horizontal: 'left',
-				vertical: 'bottom',
-				direction: 'horizontal',
-				pattern: {
-					color: '#7A7E83',
-					backgroundColor: '#fff',
-					selectedColor: '#007AFF',
-					buttonColor: '#007AFF',
-					iconColor: '#fff'
-				},
-				is_color_type: false,
-				content: [{
-						iconPath: '/static/image.png',
-						selectedIconPath: '/static/image-active.png',
-						text: '相册',
-						active: false
-					},
-					{
-						iconPath: '/static/home.png',
-						selectedIconPath: '/static/home-active.png',
-						text: '首页',
-						active: false
-					},
-					{
-						iconPath: '/static/star.png',
-						selectedIconPath: '/static/star-active.png',
-						text: '收藏',
-						active: false
-					}
-				]
-			}
+				numberValue: 0,
+				vModelValue: 0,
+				value:0,
+				menusData:{}
+			};
 		},
-		onBackPress() {
-			if (this.$refs.fab.isShow) {
-				this.$refs.fab.close()
-				return true
-			}
-			return false
+		onLoad(){
+			
 		},
-		methods: {
-			trigger(e) {
-				console.log(e)
-				this.content[e.index].active = !e.item.active
-				uni.showModal({
-					title: '提示',
-					content: `您${this.content[e.index].active ? '选中了' : '取消了'}${e.item.text}`,
-					success: function(res) {
-						if (res.confirm) {
-							console.log('用户点击确定')
-						} else if (res.cancel) {
-							console.log('用户点击取消')
+		methods:{
+			navigateTo(item){
+				let value = '../menu/menu?id=' + item.id;
+				uni.navigateTo({
+					url: value,
+					events: {
+						recive: (data) => {
+							//data.data为返回的数据
+							console.log('返回的数据',data.data)
+							this.data = data.data
 						}
+					},
+					success: (res) => {
+						res.eventChannel.emit('send', {
+							data: this.data
+						})
 					}
 				})
 			},
-			fabClick() {
-				uni.showToast({
-					title: '点击了悬浮按钮',
-					icon: 'none'
+			change(value) {
+				this.numberValue = value
+			},
+			nativeStop(){
+				
+			},
+			changeValue(value,item) {
+				this.menusData = Object.assign({},this.menus)
+				this.menus.some(val => {
+				 	if(val.id == item.id) return val.quantity = value;
+				})
+				// item.quantity = value;
+				this.value = 0;
+				this.menus.forEach(val => {
+					this.value += val.quantity * val.price
 				})
 			},
-			switchBtn(hor, ver) {
-				if (hor === 0) {
-					this.direction = this.direction === 'horizontal' ? 'vertical' : 'horizontal'
-					this.directionStr = this.direction === 'horizontal' ? '垂直' : '水平'
-				} else {
-					this.horizontal = hor
-					this.vertical = ver
-				}
-				this.$forceUpdate()
-			},
-			switchColor() {
-				this.is_color_type = !this.is_color_type
-				if (this.is_color_type) {
-					this.pattern.iconColor = '#aaa'
-					this.pattern.buttonColor = '#fff'
-				} else {
-					this.pattern.iconColor = '#fff'
-					this.pattern.buttonColor = '#007AFF'
-				}
-			}
 		}
 	}
 </script>
 
-<style lang="scss">
-	.warp {
-		padding: 10px;
+<style lang="less">
+	.chat-custom-right {
+		flex: 1;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-end;
 	}
-
-	.button {
-		margin-bottom: 10px;
+	
+	// .uni-list-chat__content-note,.uni-ellipsis{
+	// 	color: black;
+	// 	background-color: black;
+	// }
+	.chat-custom-text {
+		font-size: 12px;
+		color: #999;
 	}
 </style>

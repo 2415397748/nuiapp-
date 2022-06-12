@@ -3,16 +3,7 @@
 		<view>
 			<uni-search-bar class="uni-mt-10" radius="5" placeholder="搜索" clearButton="auto" cancelButton="none" v-model="val"/>
 		</view>
-		<view v-for="(item,index) in list" class="item" :key="item.id">
-			<image style="width: 100px; height: 100px;" :src="item.src" :alt="item.menu"  @click="navigateTo(item)"></image>
-			<view>
-				<text>{{item.menu}}</text>
-			</view>
-		</view>
-		<vue-settlement></vue-settlement>
-		<view>
-			点单数量：{{data.money}}
-		</view>
+		<vue-settlement :menus="list" :index="index"></vue-settlement>
 	</view>
 </template>
 
@@ -20,47 +11,64 @@
 	export default {
 		data() {
 			return {
+				index:123,
 				//菜单列表
 				menus:[
 					{
 						id: 1,
-						src: '../../static/qingcaichaolongxia.jpeg',
+						src: '/static/qingcaichaolongxia.jpeg',
 						menu:'青菜炒龙虾',
+						price:20,
+						quantity:0
 					},
 					{
 						id: 2,
-						src: '../../static/lajiaochaorou.jpeg',
+						src: '/static/lajiaochaorou.jpeg',
 						menu:'辣椒炒肉',
+						price:16,
+						quantity:0
 					},
 					{
 						id: 3,
-						src: '../../static/mapodoufu.jpeg',
+						src: '/static/mapodoufu.jpeg',
 						menu:'麻婆豆腐',
+						price:14,
+						quantity:0
 					},
 					{
 						id: 4,
-						src: '../../static/xianggudundoufu.jpeg',
+						src: '/static/xianggudundoufu.jpeg',
 						menu:'香菇炖豆腐',
+						price:15,
+						quantity:0
 					},
 					{
 						id: 6,
-						src: '../../static/laziya.jpeg',
+						src: '/static/laziya.jpeg',
 						menu:'辣子鸭',
+						price:16,
+						quantity:0
 					},
 					{
 						id: 7,
-						src: '../../static/xiangguhuaji.jpeg',
+						src: '/static/xiangguhuaji.jpeg',
 						menu:'香菇滑鸡',
+						price:17,
+						quantity:0
 					},
 					{
 						id: 11,
-						src: '../../static/hongshaoqiezi.jpeg',
+						src: '/static/hongshaoqiezi.jpeg',
 						menu:'红烧茄子',
+						price:13,
+						quantity:0
 					},
 					{
 						id: 12,
-						src: '../../static/fanqiechaojidan.jpeg',
+						src: '/static/fanqiechaojidan.jpeg',
 						menu:'番茄炒鸡蛋',
+						price:18,
+						quantity:0
 					},
 				],
 				filterName:'',
@@ -103,29 +111,11 @@
 			}
 		},
 		onLoad() {
-			console.log(this.data)
+			
 		},
 		methods: {
 			search(val){
 				this.val = this.filterName
-			},
-			navigateTo(item){
-				let value = '../menu/menu?id=' + item.id;
-				uni.navigateTo({
-					url: value,
-					events: {
-						recive: (data) => {
-							//data.data为返回的数据
-							console.log('返回的数据',data.data)
-							this.data = data.data
-						}
-					},
-					success: (res) => {
-						res.eventChannel.emit('send', {
-							data: this.data
-						})
-					}
-				})
 			},
 		},
 		computed:{
@@ -146,10 +136,10 @@
 
 <style>
 .item{
-	padding: 10px 10px;
+	/* padding: 10px 10px;
 	display: inline-block;
 	width: calc(50% - 20px);
-	text-align:center
+	text-align:center */
  }
  .warp {
  		padding: 10px;
