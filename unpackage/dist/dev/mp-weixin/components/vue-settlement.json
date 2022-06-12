@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "uni-fab": "/uni_modules/uni-fab/components/uni-fab/uni-fab"
+    "uni-list": "/uni_modules/uni-list/components/uni-list/uni-list",
+    "uni-list-chat": "/uni_modules/uni-list/components/uni-list-chat/uni-list-chat",
+    "uni-number-box": "/uni_modules/uni-number-box/components/uni-number-box/uni-number-box"
   },
   "component": true
 }

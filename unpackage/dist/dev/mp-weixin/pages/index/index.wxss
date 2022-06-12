@@ -1,9 +1,9 @@
 
 .item{
-	padding: 10px 10px;
+	/* padding: 10px 10px;
 	display: inline-block;
 	width: calc(50% - 20px);
-	text-align:center
+	text-align:center */
 }
 .warp {
  		padding: 10px;

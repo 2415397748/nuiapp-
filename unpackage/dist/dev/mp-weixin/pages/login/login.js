@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uniForms: function() {
-      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 48))
+      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 61))
     },
     uniFormsItem: function() {
-      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms-item/uni-forms-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 59))
+      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms-item/uni-forms-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 72))
     },
     uniEasyinput: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 66))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 79))
     }
   }
 } catch (e) {
@@ -187,7 +187,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _validatorUtils = __webpack_require__(/*! ../../Utils/validatorUtils.js */ 28); //
+var _validatorUtils = __webpack_require__(/*! @/Utils/validatorUtils.js */ 28); //
 //
 //
 //
@@ -217,7 +217,7 @@ var _validatorUtils = __webpack_require__(/*! ../../Utils/validatorUtils.js */ 2
 var _default = { data: function data() {return { token: false, MySQL: [{ account: 'admin', password: 'admin123' }], val: 'yq1586', // 表单数据
       formData: { account: '', password: '' }, rules: { // 对account字段进行必填验证
         account: { rules: [{ required: true, errorMessage: '账号不能为空' }, { minLength: 5, maxLength: 10, errorMessage: '账号长度在 {minLength} 到 {maxLength} 个字符' }, {
-            validateFunction: _validatorUtils.validateaCcount }] },
+            validateFunction: _validatorUtils.validateCcount }] },
 
 
 
@@ -229,7 +229,7 @@ var _default = { data: function data() {return { token: false, MySQL: [{ account
             errorMessage: '请输入正确的邮箱地址' },
 
           {
-            validateFunction: _validatorUtils.validateaPassword }] } } };
+            validateFunction: _validatorUtils.validatePassword }] } } };
 
 
 
@@ -244,7 +244,6 @@ var _default = { data: function data() {return { token: false, MySQL: [{ account
     formSubmit: function formSubmit() {var _this = this;
       var account = this.MySQL.filter(function (items) {return items.account === _this.formData.account && items.password === _this.formData.password;});
       this.$refs.form.validate().then(function (res) {
-        console.log(_this.$store.state.token, '登录前');
         if (account.length < 1) {
           uni.showModal({
             content: '账号密码错误',

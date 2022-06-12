@@ -106,10 +106,10 @@ var components
 try {
   components = {
     uniSearchBar: function() {
-      return Promise.all(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 37))
+      return Promise.all(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 43))
     },
     vueSettlement: function() {
-      return __webpack_require__.e(/*! import() | components/vue-settlement */ "components/vue-settlement").then(__webpack_require__.bind(null, /*! @/components/vue-settlement.vue */ 73))
+      return __webpack_require__.e(/*! import() | components/vue-settlement */ "components/vue-settlement").then(__webpack_require__.bind(null, /*! @/components/vue-settlement.vue */ 54))
     }
   }
 } catch (e) {
@@ -164,16 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -186,47 +177,64 @@ var _default =
 {
   data: function data() {
     return {
+      index: 123,
       //菜单列表
       menus: [
       {
         id: 1,
-        src: '../../static/qingcaichaolongxia.jpeg',
-        menu: '青菜炒龙虾' },
+        src: '/static/qingcaichaolongxia.jpeg',
+        menu: '青菜炒龙虾',
+        price: 20,
+        quantity: 0 },
 
       {
         id: 2,
-        src: '../../static/lajiaochaorou.jpeg',
-        menu: '辣椒炒肉' },
+        src: '/static/lajiaochaorou.jpeg',
+        menu: '辣椒炒肉',
+        price: 16,
+        quantity: 0 },
 
       {
         id: 3,
-        src: '../../static/mapodoufu.jpeg',
-        menu: '麻婆豆腐' },
+        src: '/static/mapodoufu.jpeg',
+        menu: '麻婆豆腐',
+        price: 14,
+        quantity: 0 },
 
       {
         id: 4,
-        src: '../../static/xianggudundoufu.jpeg',
-        menu: '香菇炖豆腐' },
+        src: '/static/xianggudundoufu.jpeg',
+        menu: '香菇炖豆腐',
+        price: 15,
+        quantity: 0 },
 
       {
         id: 6,
-        src: '../../static/laziya.jpeg',
-        menu: '辣子鸭' },
+        src: '/static/laziya.jpeg',
+        menu: '辣子鸭',
+        price: 16,
+        quantity: 0 },
 
       {
         id: 7,
-        src: '../../static/xiangguhuaji.jpeg',
-        menu: '香菇滑鸡' },
+        src: '/static/xiangguhuaji.jpeg',
+        menu: '香菇滑鸡',
+        price: 17,
+        quantity: 0 },
 
       {
         id: 11,
-        src: '../../static/hongshaoqiezi.jpeg',
-        menu: '红烧茄子' },
+        src: '/static/hongshaoqiezi.jpeg',
+        menu: '红烧茄子',
+        price: 13,
+        quantity: 0 },
 
       {
         id: 12,
-        src: '../../static/fanqiechaojidan.jpeg',
-        menu: '番茄炒鸡蛋' }],
+        src: '/static/fanqiechaojidan.jpeg',
+        menu: '番茄炒鸡蛋',
+        price: 18,
+        quantity: 0 }],
 
 
       filterName: '',
@@ -269,29 +277,11 @@ var _default =
 
   },
   onLoad: function onLoad() {
-    console.log(this.data);
+
   },
   methods: {
     search: function search(val) {
       this.val = this.filterName;
-    },
-    navigateTo: function navigateTo(item) {var _this = this;
-      var value = '../menu/menu?id=' + item.id;
-      uni.navigateTo({
-        url: value,
-        events: {
-          recive: function recive(data) {
-            //data.data为返回的数据
-            console.log('返回的数据', data.data);
-            _this.data = data.data;
-          } },
-
-        success: function success(res) {
-          res.eventChannel.emit('send', {
-            data: _this.data });
-
-        } });
-
     } },
 
   computed: {
@@ -306,7 +296,6 @@ var _default =
       }
       return this.menus;
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 20 */

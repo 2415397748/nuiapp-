@@ -139,9 +139,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -209,7 +206,6 @@ var _default =
     });
   },
   onUnload: function onUnload() {
-    this.data.money += 1;
     var eventChannel = this.getOpenerEventChannel();
     eventChannel.emit('recive', {
       data: this.data });

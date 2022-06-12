@@ -24,10 +24,35 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.warp {
-  padding: 10px;
+.uni-list {
+  display: flex;
+  background-color: #ffffff;
+  position: relative;
+  flex-direction: column;
 }
-.button {
-  margin-bottom: 10px;
+.uni-list--border {
+  position: relative;
+  z-index: -1;
+}
+.uni-list--border-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  background-color: #e5e5e5;
+  z-index: 1;
+}
+.uni-list--border-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  background-color: #e5e5e5;
 }
 
