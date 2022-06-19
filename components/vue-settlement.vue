@@ -1,18 +1,22 @@
 <template>
 	<view>
 		<view class="up_img_wrap">
-			<uni-list v-for="(item,index) in menus" :key="item.id">
+			<uni-list v-for="(item,index) in myMenus" :key="item.id">
 				<uni-list-chat :title="item.menu" :avatar="item.src" :note="'￥' + String(item.price)" badge-positon="left" clickable @click="navigateTo(item)">
 					<view class="chat-custom-right">
 						<text class="chat-custom-text"></text>
-						<uni-number-box value="0" @change="(value) => changeValue(value,item)" @click.native.stop="nativeStop()"/>
+						<uni-number-box :value="item.quantity" @change="(value) => changeValue(value,item)" @click.native.stop="nativeStop()"/>
 					</view>
 				</uni-list-chat>
 			</uni-list>
 		</view>
-		<view style="text-align: center;">
-			<text>总价格：{{value}}</text>
+		<view style="position: fixed;bottom: 5px;left: 0;width: 80%;background-color: aqua;height: 46px;z-index: 1000;">
+			<text style="line-height: 46px;">总价格：{{myTotalPrices}}</text>
 		</view>
+		<view style="position: fixed;bottom: 5px;right: 0;width: 20%;z-index: 1000;">
+			<button @click="checkOut()">结算</button>
+		</view>
+		<view style="height: 50px;"></view>
 	</view>
 </template>
 
@@ -23,9 +27,9 @@
 				type:Array,
 				required: true,
 			},
-			index:{
+			totalPrices:{
 				type:Number,
-				value:-1
+				required: true,
 			}
 		},
 		data() {
@@ -33,11 +37,9 @@
 				numberValue: 0,
 				vModelValue: 0,
 				value:0,
-				menusData:{}
+				myTotalPrices:this.totalPrices,
+				myMenus:this.menus
 			};
-		},
-		onLoad(){
-			
 		},
 		methods:{
 			navigateTo(item){
@@ -46,35 +48,50 @@
 					url: value,
 					events: {
 						recive: (data) => {
-							//data.data为返回的数据
-							console.log('返回的数据',data.data)
-							this.data = data.data
+							this.myMenus = data.data;
+							this.myTotalPrices = 0;
+							data.data.forEach(val => {
+								this.myTotalPrices += val.quantity * val.price
+							})
 						}
 					},
 					success: (res) => {
 						res.eventChannel.emit('send', {
-							data: this.data
+							//data为传入的数据
+							// data: this.myMenus
 						})
 					}
 				})
-			},
-			change(value) {
-				this.numberValue = value
 			},
 			nativeStop(){
 				
 			},
 			changeValue(value,item) {
-				this.menusData = Object.assign({},this.menus)
-				this.menus.some(val => {
+				//计算价格
+				this.myMenus.some(val => {
 				 	if(val.id == item.id) return val.quantity = value;
 				})
-				// item.quantity = value;
-				this.value = 0;
-				this.menus.forEach(val => {
-					this.value += val.quantity * val.price
+				this.myTotalPrices = 0;
+				this.myMenus.forEach(val => {
+					this.myTotalPrices += val.quantity * val.price
 				})
+				//缓存菜单信息和总价
+				uni.setStorageSync('totalPrices',this.myTotalPrices);
+				uni.setStorageSync('menus',this.myMenus);
 			},
+			checkOut(){
+				if(this.myTotalPrices){
+					uni.switchTab({
+						url: '/pages/ShoppingCart/ShoppingCart'
+					});
+				}else {
+					uni.showToast({
+						title: '请先选择商品',
+						icon:'none',
+						duration: 1000
+					});
+				}
+			}
 		}
 	}
 </script>

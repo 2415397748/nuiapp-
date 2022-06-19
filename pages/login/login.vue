@@ -84,9 +84,10 @@
 				const account = this.MySQL.filter((items) => items.account === this.formData.account && items.password === this.formData.password);
 				this.$refs.form.validate().then(res=>{
 					if(account.length < 1){
-						uni.showModal({
-							content: '账号密码错误',
-							showCancel:false
+						uni.showToast({
+							title: '账号密码错误',
+							icon:'none',
+							duration: 1000
 						});
 					}else {
 						this.$store.dispatch('login', res.account);
@@ -101,14 +102,15 @@
 				const account = this.MySQL.filter((items) => items.account === this.formData.account);
 				this.$refs.form.validate().then(res=>{
 					if(account.length > 0){
-						uni.showModal({
-							content: '账号已存在',
-							showCancel:false
+						uni.showToast({
+							title: '账号已存在',
+							icon:'none',
+							duration: 1000
 						});
 					}else {
-						uni.showModal({
-							content: '注册成功',
-							showCancel:false
+						uni.showToast({
+							title: '注册成功',
+							duration: 1000
 						});
 						const formData = Object.assign({},this.formData)
 						this.MySQL.push(formData);

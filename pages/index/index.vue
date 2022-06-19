@@ -3,7 +3,7 @@
 		<view>
 			<uni-search-bar class="uni-mt-10" radius="5" placeholder="搜索" clearButton="auto" cancelButton="none" v-model="val"/>
 		</view>
-		<vue-settlement :menus="list" :index="index"></vue-settlement>
+		<vue-settlement :menus="list" :totalPrices="totalPrices"></vue-settlement>
 	</view>
 </template>
 
@@ -11,7 +11,6 @@
 	export default {
 		data() {
 			return {
-				index:123,
 				//菜单列表
 				menus:[
 					{
@@ -71,6 +70,7 @@
 						quantity:0
 					},
 				],
+				totalPrices:0,
 				filterName:'',
 				val:'',
 				data:{
@@ -111,7 +111,24 @@
 			}
 		},
 		onLoad() {
-			
+			//取出总价
+			const totalPrices = uni.getStorageSync('totalPrices');
+			//取出菜单信息
+			const menus = uni.getStorageSync('menus');
+			if(totalPrices >= 0){
+				this.totalPrices = totalPrices;
+				this.menus = menus;
+			}
+		},
+		onShow(){
+			//取出总价
+			const totalPrices = uni.getStorageSync('totalPrices');
+			//取出菜单信息
+			const menus = uni.getStorageSync('menus');
+			if(totalPrices >= 0){
+				this.totalPrices = totalPrices;
+				this.menus = menus;
+			}
 		},
 		methods: {
 			search(val){
