@@ -86,11 +86,21 @@
 				],
 			}
 		},
+		onLoad(){
+			//取出总价
+			const totalPrices = uni.getStorageSync('totalPrices');
+			//取出菜单信息
+			const menus = uni.getStorageSync('menus');
+			if(totalPrices > 0){
+				this.totalPrices = totalPrices;
+				this.menus = menus;
+			}
+		},
 		onShow() {
 			//取出总价和菜单信息
 			const totalPrices = uni.getStorageSync('totalPrices');
 			const menus = uni.getStorageSync('menus');
-			if(totalPrices){
+			if(totalPrices > 0){
 				this.totalPrices = totalPrices;
 				this.myMenus = Object.assign(menus,{});
 			}
