@@ -115,7 +115,7 @@
 			const totalPrices = uni.getStorageSync('totalPrices');
 			//取出菜单信息
 			const menus = uni.getStorageSync('menus');
-			if(totalPrices > 0){
+			if(totalPrices >= 0){
 				this.totalPrices = totalPrices;
 				this.menus = menus;
 			}
@@ -125,7 +125,7 @@
 			const totalPrices = uni.getStorageSync('totalPrices');
 			//取出菜单信息
 			const menus = uni.getStorageSync('menus');
-			if(totalPrices > 0){
+			if(totalPrices >= 0){
 				this.totalPrices = totalPrices;
 				this.menus = menus;
 			}

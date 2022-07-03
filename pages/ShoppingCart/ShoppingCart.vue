@@ -100,7 +100,7 @@
 			//取出总价和菜单信息
 			const totalPrices = uni.getStorageSync('totalPrices');
 			const menus = uni.getStorageSync('menus');
-			if(totalPrices > 0){
+			if(totalPrices >= 0){
 				this.totalPrices = totalPrices;
 				this.myMenus = Object.assign(menus,{});
 			}
