@@ -1,27 +1,32 @@
 # nuiapp-点餐
 
 #### 介绍
-点餐uniapp源码
- uniapp点餐登录以及搜索
+
+点餐 uniapp 源码
+uniapp 点餐登录以及搜索
 主要为点餐以及结账功能
 登录注册权限设置
-
 
 # nuiapp-点餐
 
 #### 介绍
-点餐uniapp源码
- uniapp点餐登录以及搜索
+
+点餐 uniapp 源码
+uniapp 点餐登录以及搜索
 主要为点餐以及结账功能
 登录注册权限设置
 
+#### 软件架构
+
+软件架构说明：
+uniapp 以及 uni ui
+html vue css 以及 js
+
+登录注册权限设置功能
 
 #### 软件架构
-软件架构说明：
-uniapp以及uni ui
-html vue css 以及js
 
-
+软件架构说明
 
 #### 安装教程
 
@@ -31,8 +36,6 @@ html vue css 以及js
 
 #### 使用说明
 
-
-git分支为dev分支
 1.  xxxx
 2.  xxxx
 3.  xxxx
@@ -44,10 +47,9 @@ git分支为dev分支
 3.  提交代码
 4.  新建 Pull Request
 
-
 #### 特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
+1.  使用 Readme_XXX.md 来支持不同的语言，例如 Readme_en.md, Readme_zh.md
 2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
 3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
 4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
