@@ -1,5 +1,5 @@
 <template>
-	<!-- 主菜单 -->
+	<!-- 主页面 -->
 	<view>
 		<view>
 			<uni-search-bar
